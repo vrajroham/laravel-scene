@@ -181,7 +181,9 @@ Override the method `getNullState` to return the default state if the object is 
 Usually it is better to do your ordering before passing into the transformer. However in cases where you require to order by a field which is only present after the transformation you can override `getOrderBy` to provide ordering. You should return the field name as a string to order by. If you require direction return an array. (Eg: `['field_name', 'DESC']`)
 
 ### Post process hook.
-To do any changes __after__ all transformations you can override the method `transformObject`. The transformed output array will be passed in as the first argument and original object as the second.
+
+- Transform single object: To do any changes __after__ all transformations you can override the method `transformObject`. The transformed output array will be passed in as the first argument and original object as the second.
+- Transform multiple objects: To do any changes __after__ all transformations you can override the method `transformObjects`. The transformed output collection will be passed in as the first argument.
 
 # Licence
 MIT

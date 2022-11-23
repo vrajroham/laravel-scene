@@ -236,6 +236,37 @@ class SimpleTests extends BaseTestCase
         );
     }
 
+    public function testPostProcessCollection()
+    {
+        $transformer = new class extends SceneTransformer
+        {
+            protected function transformObjects(Collection $data)
+            {
+                return $data->sortBy('id', SORT_REGULAR, true);
+            }
+
+            protected function getStructure()
+            {
+                return ['id', 'key'];
+            }
+        };
+
+        $this->assertTransformation(
+            $transformer,
+            $this->personsArray(),
+            [
+                [
+                    'id'  => 2,
+                    'key' => 'John Doe',
+                ],
+                [
+                    'id'  => 1,
+                    'key' => 'Azaan',
+                ],
+            ]
+        );
+    }
+
     public function testOrdering()
     {
         $transformer = new class extends SceneTransformer

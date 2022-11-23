@@ -310,6 +310,8 @@ abstract class SceneTransformer implements Transformer
                 $result = ($orderType == 'desc') ? $result->sortByDesc($orderField) : $result->sortBy($orderField);
             }
 
+            $result = $this->transformObjects($result);
+
             return $result->values()->toArray();
 
         } else {
@@ -410,6 +412,21 @@ abstract class SceneTransformer implements Transformer
         // dummy implementation. Should be overridden
         // by child classes for extra logic
         return $object;
+    }
+
+    /**
+     * Given an all objects does any transformations. This function is called after applying
+     * structure transformations.
+     *
+     * @param Collection $data final data to apply the transformations on
+     *
+     * @return Collection transformed data
+     */
+    protected function transformObjects(Collection $data)
+    {
+        // dummy implementation. Should be overridden
+        // by child classes for extra logic
+        return $data;
     }
 
     /**
